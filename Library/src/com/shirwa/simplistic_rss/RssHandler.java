@@ -30,6 +30,7 @@ public class RssHandler extends DefaultHandler {
     private RssItem currentItem;
     private boolean parsingTitle;
     private boolean parsingLink;
+    private boolean parsingDescription;
 
     public RssHandler() {
         rssItemList = new ArrayList<RssItem>();
@@ -48,9 +49,11 @@ public class RssHandler extends DefaultHandler {
             parsingTitle = true;
         else if (qName.equals("link"))
             parsingLink = true;
+        else if (qName.equals("description"))
+            parsingDescription = true;
         else if (qName.equals("media:thumbnail") || qName.equals("media:content") || qName.equals("image")) {
             if (attributes.getValue("url") != null)
-                currentItem.setImage(attributes.getValue("url"));
+                currentItem.setImageUrl(attributes.getValue("url"));
         }
     }
 
@@ -63,14 +66,20 @@ public class RssHandler extends DefaultHandler {
             parsingTitle = false;
         else if (qName.equals("link"))
             parsingLink = false;
+        else if (qName.equals("description"))
+            parsingDescription = true;
     }
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
-        if (parsingTitle && currentItem != null)
-            currentItem.setTitle(new String(ch, start, length));
-        else if (parsingLink && currentItem != null)
-            currentItem.setLink(new String(ch, start, length));
+        if (currentItem != null) {
+            if (parsingTitle)
+                currentItem.setTitle(new String(ch, start, length));
+            else if (parsingLink)
+                currentItem.setLink(new String(ch, start, length));
+            else if (parsingDescription)
+                currentItem.setDescription(new String(ch, start, length));
+        }
     }
 }
 

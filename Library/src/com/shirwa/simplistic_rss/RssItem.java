@@ -18,11 +18,20 @@ package com.shirwa.simplistic_rss;
 
 public class RssItem {
     String title;
-    String image;
+    String description;
     String link;
+    String imageUrl;
 
-    public String getImage() {
-        return image;
+    public String getDescription() {
+        return description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getTitle() {
@@ -37,8 +46,8 @@ public class RssItem {
         this.link = link;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setTitle(String title) {
