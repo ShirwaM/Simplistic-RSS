@@ -5,12 +5,15 @@ This is a very simple RSS library for Android. Supports extracting the url of im
 
 Usage
 ==============
-//url - String that contains the url of the RSS Feed. 
+String that contains the url of the RSS Feed. 
+```Java
 RssReader rssReader = new RssReader(url);
+```
 
-//returns a list of Rss Items. 
+returns a list of Rss Items. 
+```Java
 ArrayList<RssItem> RssItems = rssReader.getItems();
-
+```
 Customization
 ==============
 -If you want to add a new attribute to the Rss item, edit the RssItem class to contain getters/setters for the specific attribue. 
