@@ -33,6 +33,7 @@ public class RssHandler extends DefaultHandler {
     private boolean parsingDescription;
 
     public RssHandler() {
+        //Initializes a new ArrayList that will hold all the generated RSS items.
         rssItemList = new ArrayList<RssItem>();
     }
 
@@ -41,6 +42,7 @@ public class RssHandler extends DefaultHandler {
     }
 
 
+    //Called when an opening tag is reached, such as <item> or <title>
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         if (qName.equals("item"))
@@ -57,9 +59,11 @@ public class RssHandler extends DefaultHandler {
         }
     }
 
+    //Called when a closing tag is reached, such as </item> or </title>
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if (qName.equals("item")) {
+            //End of an item so add the currentItem to the list of items.
             rssItemList.add(currentItem);
             currentItem = null;
         } else if (qName.equals("title"))
@@ -70,13 +74,17 @@ public class RssHandler extends DefaultHandler {
             parsingDescription = true;
     }
 
+    //Goes through character by character when parsing whats inside of a tag.
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         if (currentItem != null) {
+            //If parsingTitle is true, then that means we are inside a <title> tag so the text is the title of an item.
             if (parsingTitle)
                 currentItem.setTitle(new String(ch, start, length));
+            //If parsingLink is true, then that means we are inside a <link> tag so the text is the link of an item.
             else if (parsingLink)
                 currentItem.setLink(new String(ch, start, length));
+            //If parsingDescription is true, then that means we are inside a <description> tag so the text is the description of an item.
             else if (parsingDescription)
                 currentItem.setDescription(new String(ch, start, length));
         }
