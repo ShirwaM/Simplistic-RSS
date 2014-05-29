@@ -71,7 +71,7 @@ public class RssHandler extends DefaultHandler {
         else if (qName.equals("link"))
             parsingLink = false;
         else if (qName.equals("description"))
-            parsingDescription = true;
+            parsingDescription = false;
     }
 
     //Goes through character by character when parsing whats inside of a tag.
@@ -81,10 +81,10 @@ public class RssHandler extends DefaultHandler {
             //If parsingTitle is true, then that means we are inside a <title> tag so the text is the title of an item.
             if (parsingTitle)
                 currentItem.setTitle(new String(ch, start, length));
-            //If parsingLink is true, then that means we are inside a <link> tag so the text is the link of an item.
+                //If parsingLink is true, then that means we are inside a <link> tag so the text is the link of an item.
             else if (parsingLink)
                 currentItem.setLink(new String(ch, start, length));
-            //If parsingDescription is true, then that means we are inside a <description> tag so the text is the description of an item.
+                //If parsingDescription is true, then that means we are inside a <description> tag so the text is the description of an item.
             else if (parsingDescription)
                 currentItem.setDescription(new String(ch, start, length));
         }
