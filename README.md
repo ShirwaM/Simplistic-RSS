@@ -4,7 +4,7 @@ Simplistic-RSS
 This is a very simple RSS library for Android. Supports extracting the url of images if they are present. Its still very early, but it will continue to get better with updates. 
 
 [Sample App](https://github.com/ShirwaM/Simplistic-RSS-Demo)
-![Screenshot](https://raw.githubusercontent.com/ShirwaM/Simplistic-RSS/master/Screenshot_framed.png)
+![Screenshot](https://raw.githubusercontent.com/ShirwaM/Simplistic-RSS/master/Screenshot_2014-08-07-03-47-10_framed.png)
 
 Usage
 ==============
